@@ -3,7 +3,7 @@
 # file path
 filePath="public/chartjs/"
 interface="ens4"
-fileName="$interface.json"
+fileName="vnstat.json"
 
 VNSTAT="vnstat"
 

@@ -14,7 +14,7 @@ const moment = require('./public/js/moment');
 
 const config = require('./config.json');
 const chartData = require('./public/chartjs/chart.json');
-const data = require('./public/chartjs/ens4.json');
+const data = require('./public/chartjs/vnstat.json');
 
 // Deep copy
 // Avoid repeated visits due to the shallow copying
