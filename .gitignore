@@ -4,5 +4,4 @@ log/
 .idea
 .vs/
 .vscode/
-public/chart/*
 public/chartjs/vnstat.json
