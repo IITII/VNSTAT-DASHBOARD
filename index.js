@@ -99,7 +99,7 @@ try {
     });
     // convert KB to GB
     bitsToGb(data.interfaces[interfaceIndex].traffic.hours);
-    bitsToGb(data.interfaces[interfaceIndex].traffic.daily);
+    bitsToGb(data.interfaces[interfaceIndex].traffic.days);
     bitsToGb(data.interfaces[interfaceIndex].traffic.months);
     bitsToGb(data.interfaces[interfaceIndex].traffic.tops);
     barChart(hours, data.interfaces[interfaceIndex].traffic.hours, config.Hours.barChart, function (err) {
@@ -116,7 +116,7 @@ try {
             console.log("Wrote " + config.saveName[0]);
         }
     });
-    barChart(days, data.interfaces[interfaceIndex].traffic.daily, config.daily.barChart, function (err) {
+    barChart(days, data.interfaces[interfaceIndex].traffic.days, config.daily.barChart, function (err) {
         if (err)
             console.error(err);
         else {

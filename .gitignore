@@ -5,4 +5,4 @@ log/
 .vs/
 .vscode/
 public/chart/*
-public/chartjs/ens4.json
+public/chartjs/vnstat.json
