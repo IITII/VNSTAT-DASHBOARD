@@ -1,0 +1,17 @@
+{
+  "name": "vnstatchart",
+  "version": "1.0.0",
+  "description": "A h5 chart for vnstat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vnstat",
+    "chart",
+    "chart.js"
+  ],
+  "author": "IITII",
+  "license": "ISC",
+  "dependencies": {}
+}

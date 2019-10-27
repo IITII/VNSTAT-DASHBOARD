@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title id="title">VNSTAT-IITII</title>
+    <script type="text/javascript" src="./js/Chart.js"></script>
+    <script type="text/javascript" src="./js/Chart.min.js"></script>
+    <script type="text/javascript" src="./js/jquery-3.4.1.min.js"></script>
+    <link rel="icon" href="img/lineChart_16px.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/lineChart_32px.ico" type="image/x-icon">
+</head>
+
+<body>
+    <canvas id="HOUR" style="display: block; height: 285px; width: 570px;" width="706" height="353"></canvas>
+    <canvas id="DAY" style="display: block; height: 285px; width: 570px;" width="706" height="353"></canvas>
+    <div style="white-space: nowrap">
+        <div style="display: inline-flex;width: 50%;">
+            <canvas id="TOP10" style="display: block; height: 285px; width: 570px;" width="706" height="353"></canvas>
+        </div>
+        <div style="display: inline-flex;width: 50%;">
+            <canvas id="MONTH" style="display: block; height: 285px; width: 570px;" width="706" height="353"></canvas>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        jQuery.get("chart/hours.json", function (json) {
+            new Chart(document.getElementById("HOUR"), json)
+        });
+        jQuery.get("chart/days.json", function (json) {
+            new Chart(document.getElementById("DAY"), json)
+        });
+        jQuery.get("chart/tops.json", function (json) {
+            new Chart(document.getElementById("TOP10"), json)
+        });
+        jQuery.get("chart/months.json", function (json) {
+            new Chart(document.getElementById("MONTH"), json)
+        });
+    });
+</script>
+
+</html>

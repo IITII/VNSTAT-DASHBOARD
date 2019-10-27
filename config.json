@@ -1,0 +1,147 @@
+{
+  "interface": "ens4",
+  "saveDir": "./public/chart/",
+  "saveName": [
+    "hours.json",
+    "days.json",
+    "months.json",
+    "tops.json"
+  ],
+  "DecimalNumber": 2,
+  "chartType": [
+    "bar",
+    "line",
+    "pie"
+  ],
+  "color": [
+    "rgb(255, 99, 132)",
+    "rgb(255, 99, 132)",
+    "rgb(54, 162, 235)",
+    "rgb(54, 162, 235)"
+  ],
+  "labels": [
+    "RX (下载)",
+    "TX (上传)"
+  ],
+  "fsOptions": {
+    "charset": "utf-8"
+  },
+  "trafficUnit": {
+    "KB": 1,
+    "MB": 1024,
+    "GB": 1048576,
+    "TB": 1073741824
+  },
+  "Hours": {
+    "countChart": {
+      "chartType": [
+        "line",
+        "line"
+      ]
+    },
+    "barChart": {
+      "labels": [
+        "RX (下载)",
+        "TX (上传)",
+        "小时",
+        "流量 (G)"
+      ],
+      "chartType": [
+        "bar",
+        "bar",
+        "bar"
+      ],
+      "title": "Last 24 Hours Traffic",
+      "color": [
+        "rgb(255, 99, 132)",
+        "rgb(255, 99, 132)",
+        "rgb(54, 162, 235)",
+        "rgb(54, 162, 235)"
+      ]
+    }
+  },
+  "daily": {
+    "countChart": {
+      "chartType": [
+        "line",
+        "line"
+      ]
+    },
+    "barChart": {
+      "labels": [
+        "RX (下载)",
+        "TX (上传)",
+        "日期",
+        "流量 (G)"
+      ],
+      "chartType": [
+        "bar",
+        "bar",
+        "bar"
+      ],
+      "title": "Daily Traffic",
+      "color": [
+        "rgb(255, 99, 132)",
+        "rgb(255, 99, 132)",
+        "rgb(54, 162, 235)",
+        "rgb(54, 162, 235)"
+      ]
+    }
+  },
+  "monthly": {
+    "countChart": {
+      "chartType": [
+        "line",
+        "line"
+      ]
+    },
+    "barChart": {
+      "labels": [
+        "RX (下载)",
+        "TX (上传)",
+        "月份",
+        "流量 (G)"
+      ],
+      "chartType": [
+        "bar",
+        "bar",
+        "bar"
+      ],
+      "title": "Monthly Traffic",
+      "color": [
+        "rgb(25, 99, 132)",
+        "rgb(25, 99, 132)",
+        "rgb(5, 162, 235)",
+        "rgb(5, 162, 235)"
+      ]
+    }
+  },
+  "TOP10": {
+    "countChart": {
+      "chartType": [
+        "line",
+        "line"
+      ]
+    },
+    "barChart": {
+      "labels": [
+        "RX (下载)",
+        "TX (上传)",
+        "日期",
+        "流量 (G)"
+      ],
+      "chartType": [
+        "bar",
+        "bar",
+        "bar"
+      ],
+      "title": "TOP10 days",
+      "color": [
+        "rgb(25, 99, 132)",
+        "rgb(25, 99, 132)",
+        "rgb(5, 162, 235)",
+        "rgb(5, 162, 235)"
+      ]
+    }
+  }
+}
