@@ -5,3 +5,4 @@ log/
 .vs/
 .vscode/
 public/chartjs/vnstat.json
+vnstatchart.iml
