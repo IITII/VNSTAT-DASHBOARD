@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VNSTAT</title>
+    <!-- script -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript"
+            src="//raw.githubusercontent.com/IITII/VNSTAT-DASHBOARD/ALLINONE/generate.js"></script>
+    <!-- icons -->
+    <link rel="icon" href="//iitii.github.io/VNSTAT-DASHBOARD/img/lineChart_16px.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="//iitii.github.io/VNSTAT-DASHBOARD/img/lineChart_32px.ico"
+          type="image/x-icon">
+</head>
+<body style="font-family:  'PT Mono',serif,'Source Code Pro','Source Serif Pro','Fira Code'">
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <span class="navbar-brand mb-0 h1">VNSTAT-DASHBOARD</span>
+        <a href="https://github.com/IITII">Github</a>
+    </nav>
+</header>
+<main role="main" class="container">
+    <div class="py-5 text-center">
+        <h3 style="font-family:  'PT Mono',serif,'Source Code Pro','Source Serif Pro','Fira Code'">
+            A Simple VNSTAT Chart Online Generator
+        </h3>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Attention! </strong> For some reason, the interface id which you want to see must be "ens4"
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            Here is a <a href="https://github.com/IITII/VNSTAT-DASHBOARD/blob/ALLINONE/docs/demo.json">demo data</a>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    <div class="container">
+        <label for="input"></label><textarea placeholder="Paste Here !!!" class="form-control col-auto mb-auto"
+                                             id="input" style="margin-top: 0px; margin-bottom: 0px; height: 125px;"
+                                             value=""></textarea>
+        <br>
+        <button onclick="vnstat()" class="btn btn-primary form-control">Submit</button>
+    </div>
+    <canvas id="HOUR" style="display: block; height: 285px; width: 570px;" width="706" height="353"></canvas>
+    <canvas id="DAY" style="display: block; height: 285px; width: 570px;" width="706" height="353"></canvas>
+    <div style="white-space: nowrap">
+        <div style="display: inline-flex;width: 50%;">
+            <canvas id="TOP10" style="display: block; height: 285px; width: 570px;" width="706" height="353"></canvas>
+        </div>
+        <div style="display: inline-flex;width: 50%;">
+            <canvas id="MONTH" style="display: block; height: 285px; width: 570px;" width="706" height="353"></canvas>
+        </div>
+    </div>
+</main>
+</body>
+</html>
