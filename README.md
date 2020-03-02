@@ -9,7 +9,7 @@
 
 * Paste & Click Button.
 
-> For some reason, the interface id which you want to see must be "ens4"!!!  
+> Fixed! -> ~~For some reason, the interface id which you want to see must be "ens4"!!!~~  
 > See [demo data](docs/demo.json)  
 
 #### Know issues

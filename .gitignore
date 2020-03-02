@@ -6,3 +6,4 @@ log/
 .vscode/
 public/chartjs/vnstat.json
 vnstatchart.iml
+generate.js

@@ -35,7 +35,8 @@
             A Simple VNSTAT Chart Online Generator
         </h3>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Attention! </strong> For some reason, the interface id which you want to see must be "ens4"
+            <strong>Attention! </strong> You can switch the interface that you want to see after you clicked the submit
+            button.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -52,7 +53,12 @@
                                              id="input" style="margin-top: 0px; margin-bottom: 0px; height: 125px;"
                                              value=""></textarea>
         <br>
-        <button onclick="vnstat()" class="btn btn-primary form-control">Submit</button>
+        <button onclick="submit()" class="btn btn-primary form-control">Submit</button>
+        <div>
+            <label for="interface"></label>
+            <select id="interface" class="custom-select" onchange="vnstat()" hidden="hidden">
+            </select>
+        </div>
     </div>
     <canvas id="HOUR" style="display: block; height: 285px; width: 570px;" width="706" height="353"></canvas>
     <canvas id="DAY" style="display: block; height: 285px; width: 570px;" width="706" height="353"></canvas>
@@ -338,10 +344,25 @@
         }
 
         try {
+            let select = document.getElementById('interface');
+            let interfaceName = select.value === null ? config.interface : select.value;
+            if (select.getAttribute('hidden') === "hidden") {
+                let op = "";
+                data.interfaces.forEach((value, index) => {
+                    if (index === 0) {
+                        op += '<option value="' + value.id + '" selected>' + value.nick + '</option>';
+                        return true;
+                    }
+                    op += '<option value="' + value.id + '">' + value.nick + '</option>'
+                });
+                select.innerHTML = op;
+                select.removeAttribute('hidden');
+                interfaceName = config.interface;
+            }
             // get right index for special interface
             let interfaceIndex = 0;
             data.interfaces.some((value, index) => {
-                if (value.id === config.interface)
+                if (value.id === interfaceName)
                     interfaceIndex = index;
             });
             // convert KB to GB
@@ -401,6 +422,11 @@
         } catch (e) {
             console.error(e);
         }
+    }
+
+    function submit() {
+        document.getElementById('interface').setAttribute('hidden', 'hidden');
+        vnstat();
     }
 </script>
 </html>
