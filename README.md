@@ -11,7 +11,7 @@ git clone https://github.com/IITII/VNSTAT-DASHBOARD /var/www/vnstat
 cd /var/www/vnstat && git checkout ALLINONE
 sed -i "s/root \S\+/root \/var\/www\/vnstat;/g" /etc/nginx/sites-available/default \
 && nginx -t && nginx -s reload \
-cat "59 * * * * /usr/bin/vnstat --json > /var/www/vnstat/vnstat.json" \
+echo "59 * * * * /usr/bin/vnstat --json > /var/www/vnstat/vnstat.json" \
 >> /var/spool/cron/crontabs/`whoami`
 crontab -l
 # Now open your browser, type server ip and see the DashBoard
