@@ -1,5 +1,6 @@
 ### VNSTAT-DASHBOARD
 > A simple H5 DashBoard for vnstat which using `chart.js`  
+> [简体中文](https://iitii.github.io/2019/10/11/1/)  
 #### Notice
 * It will auto-load `vnstat.json` and generate chart if you put a valid `vnstat.json` at the sibling directory 
 * You can do like this if you want to build a traffic monitor site for you server 
