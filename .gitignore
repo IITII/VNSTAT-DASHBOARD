@@ -7,3 +7,4 @@ log/
 public/chartjs/vnstat.json
 vnstatchart.iml
 generate.js
+/vnstat.json

@@ -11,8 +11,8 @@
     <script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
-    <script src="//code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -51,7 +51,7 @@
     <div class="container">
         <label for="input"></label><textarea placeholder="Paste Here !!!" class="form-control col-auto mb-auto"
                                              id="input" style="margin-top: 0px; margin-bottom: 0px; height: 125px;"
-                                             value=""></textarea>
+                                             value=''></textarea>
         <br>
         <button onclick="submit()" class="btn btn-primary form-control">Submit</button>
         <div>
@@ -266,9 +266,14 @@
                 }
             }
         };
-        //config = JSON.parse(config);
-        let data = document.getElementById('input').value;
-        data = JSON.parse(data);
+        let data;
+        try {
+            data = document.getElementById('input').value;
+            data = JSON.parse(data);
+        } catch (e) {
+            console.error("Data error, please check again!");
+            return;
+        }
         let hours = JSON.parse(JSON.stringify(chartData));
         let days = JSON.parse(JSON.stringify(chartData));
         let tops = JSON.parse(JSON.stringify(chartData));
@@ -428,5 +433,22 @@
         document.getElementById('interface').setAttribute('hidden', 'hidden');
         vnstat();
     }
+
+    $(document).ready(function () {
+        try {
+            $.getJSON("vnstat.json", function (data) {
+                if (data === "")
+                    return;
+                console.log("Load json from vnstat.json");
+                $("#input").val(JSON.stringify(data));
+                submit();
+            })
+                .fail(function () {
+                    console.log("vnstat.json: No such file or File is empty. Skip....")
+                })
+        } catch (e) {
+            console.log("vnstat.json: No such file or File is empty. Skip....")
+        }
+    });
 </script>
 </html>
