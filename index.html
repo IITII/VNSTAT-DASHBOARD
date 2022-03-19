@@ -354,11 +354,7 @@
             if (select.getAttribute('hidden') === "hidden") {
                 let op = "";
                 data.interfaces.forEach((value, index) => {
-                    if (index === 0) {
-                        op += '<option value="' + value.id + '" selected>' + value.nick + '</option>';
-                        return true;
-                    }
-                    op += '<option value="' + value.id + '">' + value.nick + '</option>'
+                    op += `<option value="${value.id || value.name}" ${index === 0 ? "selected" : ""}>${value.nick || value.alias}</option>`
                 });
                 select.innerHTML = op;
                 select.removeAttribute('hidden');
