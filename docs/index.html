@@ -266,9 +266,14 @@
                 }
             }
         };
-        //config = JSON.parse(config);
-        let data = document.getElementById('input').value;
-        data = JSON.parse(data);
+        let data;
+        try {
+            data = document.getElementById('input').value;
+            data = JSON.parse(data);
+        } catch (e) {
+            console.error("Data error, please check again!");
+            return;
+        }
         let hours = JSON.parse(JSON.stringify(chartData));
         let days = JSON.parse(JSON.stringify(chartData));
         let tops = JSON.parse(JSON.stringify(chartData));
@@ -349,11 +354,7 @@
             if (select.getAttribute('hidden') === "hidden") {
                 let op = "";
                 data.interfaces.forEach((value, index) => {
-                    if (index === 0) {
-                        op += '<option value="' + value.id + '" selected>' + value.nick + '</option>';
-                        return true;
-                    }
-                    op += '<option value="' + value.id + '">' + value.nick + '</option>'
+                    op += `<option value="${value.id || value.name}" ${index === 0 ? "selected" : ""}>${value.nick || value.alias}</option>`
                 });
                 select.innerHTML = op;
                 select.removeAttribute('hidden');
@@ -430,16 +431,20 @@
     }
 
     $(document).ready(function () {
-        $.getJSON("vnstat.json", function (data) {
-            if (data === "")
-                return;
-            console.log("Load json from vnstat.json");
-            $("#input").val(JSON.stringify(data));
-            submit();
-        })
-            .fail(function () {
-                console.log("vnstat.json: No such file or File is empty")
+        try {
+            $.getJSON("vnstat.json", function (data) {
+                if (data === "")
+                    return;
+                console.log("Load json from vnstat.json");
+                $("#input").val(JSON.stringify(data));
+                submit();
             })
+                .fail(function () {
+                    console.log("vnstat.json: No such file or File is empty. Skip....")
+                })
+        } catch (e) {
+            console.log("vnstat.json: No such file or File is empty. Skip....")
+        }
     });
 </script>
 </html>
