@@ -22,6 +22,7 @@ module.exports = function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://v1.quasar.dev/quasar-cli/boot-files
     boot: [
+      'logger',
       'i18n',
       'axios',
     ],
@@ -49,6 +50,13 @@ module.exports = function (/* ctx */) {
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
 
+      showProgress: true,
+      gzip: true,
+      sourceMap: process.env.NODE_ENV !== 'production',
+      minify: process.env.NODE_ENV === 'production',
+      publicPath: process.env.PIC_DEPLOY_DIR || '/',
+      distDir: process.env.PIC_OUTPUT_DIR || undefined,
+
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
@@ -67,9 +75,9 @@ module.exports = function (/* ctx */) {
 
       // https://v1.quasar.dev/quasar-cli/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-      chainWebpack (chain) {
+      chainWebpack(chain) {
         chain.plugin('eslint-webpack-plugin')
-          .use(ESLintPlugin, [{ extensions: [ 'js', 'vue' ] }])
+          .use(ESLintPlugin, [{ extensions: ['js', 'vue'] }])
       }
     },
 
@@ -84,7 +92,16 @@ module.exports = function (/* ctx */) {
     framework: {
       iconSet: 'material-icons', // Quasar icon set
       lang: 'en-us', // Quasar language pack
-      config: {},
+      config: {
+        // dark: 'auto',
+        notify: {
+          html: false,
+          position: 'top-right',
+          timeout: 2500,
+          // closeBtn: true
+          closeBtn: '×'
+        }
+      },
 
       // Possible values for "importStrategy":
       // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
@@ -99,7 +116,13 @@ module.exports = function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'LocalStorage',
+        // 'SessionStorage',
+        'Notify',
+        'Dialog',
+        'Loading',
+      ],
     },
 
     // animations: 'all', // --- includes all animations
@@ -189,7 +212,7 @@ module.exports = function (/* ctx */) {
       // More info: https://v1.quasar.dev/quasar-cli/developing-electron-apps/node-integration
       nodeIntegration: true,
 
-      extendWebpack (/* cfg */) {
+      extendWebpack(/* cfg */) {
         // do something with Electron main process Webpack cfg
         // chainWebpack also available besides this extendWebpack
       }
