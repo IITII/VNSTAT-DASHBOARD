@@ -33,6 +33,8 @@
     "eslint-config-prettier": "^8.1.0",
     "prettier": "^2.5.1",
     "@quasar/app": "^2.0.0",
+    "vue": "^2.7.8",
+    "vue-template-compiler": "^2.7.8",
     "vuejs-logger": "^1.5.5"
   },
   "browserslist": [
