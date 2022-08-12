@@ -1,6 +1,6 @@
 <template>
   <div class="full-width q-gutter-y-sm">
-    <div class="flex flex-center no-wrap q-gutter-x-sm">
+    <div class="flex flex-center q-gutter-sm">
       <q-badge v-for="(v, k) in badgeArr" :key="k" :color="v.color" :label="v.label" />
     </div>
     <div class="flex flex-center column full-width">
@@ -123,8 +123,10 @@ export default {
         datasets,
       }
     },
-    cusWidth(fac = 0.8) {
-      return Math.floor(window.innerWidth * fac)
+    cusWidth(fac = 0.8, min = 0, maxFac = 0.8) {
+      const dy = Math.floor(window.innerWidth * fac)
+      const maxWidth = Math.floor(window.innerWidth * maxFac)
+      return min === 0 ? dy : Math.max(Math.max(dy, min), maxWidth)
     },
     additionDs(origin, count = false) {
       let res = origin
