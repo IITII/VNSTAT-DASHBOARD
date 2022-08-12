@@ -1,25 +1,16 @@
 <template>
   <q-page class="flex flex-center full-width column wrap">
     <div class="q-pa-md column q-gutter-y-md eighty-width">
-      <div class="row q-gutter-x-sm ">
-        <q-input class="col" v-model="input.rawUrls" type="textarea"
-                 autogrow autofocus outlined
-                 placeholder="VnStat Json 文件链接，以换行分隔" />
-      </div>
-      <div class="row q-gutter-x-sm ">
-        <q-btn class="col" dense color="primary" @click="reCalcCacheUrls">提交</q-btn>
-      </div>
-      <div class="row q-gutter-x-sm ">
-        <q-select class="col" label="VnStat Json 文件链接"
-                  :disable="urlOpts.length === 0"
-                  v-model="selectUrl" :options="urlOpts" />
-        <q-select class="col" label="网络接口"
-                  :disable="interfaceOpts.length === 0"
-                  v-model="selectInf" :options="interfaceOpts" />
-      </div>
-      <!-- <div class="row q-gutter-x-sm ">
-        <q-btn class="col" dense color="primary">生成图表</q-btn>
-      </div> -->
+      <q-input class="col" v-model="input.rawUrls" type="textarea"
+               autogrow autofocus outlined
+               placeholder="VnStat Json 文件链接，以换行分隔" />
+      <q-btn class="col" dense color="primary" @click="reCalcCacheUrls">提交</q-btn>
+      <q-select class="col-6" label="VnStat Json 文件链接"
+                :disable="urlOpts.length === 0"
+                v-model="selectUrl" :options="urlOpts" />
+      <q-select class="col-6" label="网络接口"
+                :disable="interfaceOpts.length === 0"
+                v-model="selectInf" :options="interfaceOpts" />
     </div>
     <div class="column eighty-width">
       <vn-dashboard v-if="interfaceData"
@@ -39,7 +30,7 @@ export default {
   data() {
     return {
       input: {
-        rawUrls: ''
+        rawUrls: '',
       },
       // select
       selectUrl: '',
@@ -66,7 +57,7 @@ export default {
       if (!(version && parseInt(version) > 1)) {
         this.$q.notify({
           message: `VnStat Json 文件版本不支持: ${version}`,
-          type: 'warning'
+          type: 'warning',
         })
         return []
       } else {
@@ -97,7 +88,7 @@ export default {
         return this.$q.notify({
           // message: '请填写有效HTTP链接',
           caption: '请填写有效HTTP链接',
-          type: 'warning'
+          type: 'warning',
         })
       }
       let res = {}
@@ -108,7 +99,7 @@ export default {
         } else {
           res[u] = {
             loaded: false,
-            data: undefined
+            data: undefined,
           }
         }
       })
@@ -124,7 +115,7 @@ export default {
         return c.data
       }
       this.$q.loading.show({
-        message: `请求: ${url} 中...`
+        message: `请求: ${url} 中...`,
       })
       return this.$axios.get(url).then(res => {
         // debugger
@@ -137,7 +128,7 @@ export default {
         return this.$q.notify({
           message: 'URL 加载失败',
           caption: e.message,
-          type: 'error'
+          type: 'error',
         })
       }).finally(() => {
         this.$q.loading.hide()
@@ -159,7 +150,7 @@ export default {
     async selectInf(v) {
       this.$log.debug(typeof v, v)
       this.saveToCache(this.input.rawUrls)
-    }
+    },
   },
   mounted() {
     const v = this.$q.localStorage.getItem(this.cacheKey)

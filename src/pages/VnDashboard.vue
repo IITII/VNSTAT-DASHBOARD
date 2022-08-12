@@ -8,7 +8,7 @@
       <vn-chat chart-name="日流量(GB)" :chart-data="latest30d" :width="cusWidth()" :height="500" />
       <div class="flex flex-center no-warp q-gutter-x-sm">
         <vn-chat chart-name="Top10天流量(GB)" :chart-data="top10d" :width="cusWidth(0.4)" :height="300" />
-        <vn-chat chart-name="月流量(GB)" :chart-data="latestMonth" :width="cusWidth(0.3)" :height="300"/>
+        <vn-chat chart-name="月流量(GB)" :chart-data="latestMonth" :width="cusWidth(0.3)" :height="300" />
         <!-- <vn-chat chart-name="年流量(GB)" :chart-data="latestYear" :width="400" /> -->
       </div>
     </div>
@@ -80,9 +80,9 @@ export default {
     },
     badgeArr() {
       return [`安装时间: ${this.cTime}`,
-      `更新时间: ${this.uTime}`,
-      `接口总上传: ${getTraffic(this.interfaceData.traffic.total.tx)}`,
-      `接口总下载: ${getTraffic(this.interfaceData.traffic.total.rx)}`,
+        `更新时间: ${this.uTime}`,
+        `接口总上传: ${getTraffic(this.interfaceData.traffic.total.tx)}`,
+        `接口总下载: ${getTraffic(this.interfaceData.traffic.total.rx)}`,
       ].map(r => {
         return {
           label: r,
@@ -97,7 +97,7 @@ export default {
         return {
           tx: getTraffic(r.tx, false),
           rx: getTraffic(r.rx, false),
-          label: getDateTime(r, format)
+          label: getDateTime(r, format),
         }
       })
     },
@@ -151,7 +151,7 @@ export default {
         origin.datasets[0].data.forEach(t => {
           acc1 += t
           acc2 += origin.datasets[1].data[i]
-          i+=1
+          i += 1
           tx.push(acc1)
           rx.push(acc2)
         })
@@ -173,7 +173,7 @@ export default {
         })
       }
       return res
-    }
+    },
   },
 }
 </script>
