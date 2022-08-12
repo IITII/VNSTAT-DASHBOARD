@@ -10,9 +10,9 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            artifact_name: pic_online/pic_online.zip
-            asset_name: pic_online.zip
-            release_name: pic_online
+            artifact_name: vnstat_dashboard/vnstat_dashboard.zip
+            asset_name: vnstat_dashboard.zip
+            release_name: vnstat_dashboard
     steps:
       - name: Checkout 🛎️
         # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
