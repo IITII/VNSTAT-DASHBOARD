@@ -157,6 +157,11 @@ export default {
     this.$log.debug('afterMount', v)
     if (v) {
       this.input.rawUrls = v
+    }
+    if (!v && window.location.host.includes("github")) {
+      this.input.rawUrls = 'https://raw.githubusercontent.com/IITII/VNSTAT-DASHBOARD/main/docs/demo.json'
+    }
+    if (this.input.rawUrls) {
       this.reCalcCacheUrls()
     }
   },
