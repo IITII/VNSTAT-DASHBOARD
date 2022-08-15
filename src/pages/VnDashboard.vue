@@ -24,6 +24,7 @@
 import { getDateTime, getTraffic } from 'src/utils/vn_utils'
 import VnChat from 'components/VnChart'
 import * as Utils from 'src/utils/chart_utils'
+// import languages from 'quasar/lang/index.json'
 
 export default {
   name: 'VnDashboard',
