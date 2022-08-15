@@ -10,9 +10,15 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            artifact_name: vnstat_dashboard/vnstat_dashboard.zip
-            asset_name: vnstat_dashboard.zip
-            release_name: vnstat_dashboard
+            artifact_name: zip/zip.zip
+            asset_name: zip.zip
+            release_name: zip
+            deploy_dir: '/'
+          - os: ubuntu-latest
+            artifact_name: zip_vn/zip_vn.zip
+            asset_name: zip_vn.zip
+            release_name: zip_vn
+            deploy_dir: '/vn'
     steps:
       - name: Checkout 🛎️
         # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
@@ -32,10 +38,11 @@ jobs:
       - name: Install and Build 🔧
         run: |
           npm install
-          quasar build
+          npm run build
       - name: Package Artifact 🎁
         run: |
           export RELEASE_NAME=${{ matrix.release_name }}
+          export PIC_DEPLOY_DIR=${{ matrix.deploy_dir }}
           mkdir ${RELEASE_NAME}
           zip -r ${RELEASE_NAME}/${RELEASE_NAME}.zip dist/spa/*
           ls -alh ${RELEASE_NAME}
