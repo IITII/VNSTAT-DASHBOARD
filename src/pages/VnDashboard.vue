@@ -7,8 +7,8 @@
       <vn-chat chart-name="24h流量(GB)" :chart-data="latest24h" :width="cusWidth()" />
       <vn-chat chart-name="日流量(GB)" :chart-data="latest30d" :width="cusWidth()" :height="500" />
       <div class="flex flex-center no-warp q-gutter-x-sm">
-        <vn-chat chart-name="Top10天流量(GB)" :chart-data="top10d" :width="cusWidth(0.4)" :height="300" />
-        <vn-chat chart-name="月流量(GB)" :chart-data="latestMonth" :width="cusWidth(0.3)" :height="300" />
+        <vn-chat chart-name="Top10天流量(GB)" :chart-data="top10d" :width="cusWidth(0.42)" :height="300" />
+        <vn-chat chart-name="月流量(GB)" :chart-data="latestMonth" :width="cusWidth(0.36)" :height="300" />
         <!-- <vn-chat chart-name="年流量(GB)" :chart-data="latestYear" :width="400" /> -->
       </div>
     </div>
@@ -123,10 +123,12 @@ export default {
         datasets,
       }
     },
-    cusWidth(fac = 0.8, min = 0, maxFac = 0.8) {
-      const dy = Math.floor(window.innerWidth * fac)
-      const maxWidth = Math.floor(window.innerWidth * maxFac)
-      return min === 0 ? dy : Math.max(Math.max(dy, min), maxWidth)
+    cusWidth(desktop = 0.8, mobile = 0.8) {
+      const isMobile = this.$q.platform.is.mobile
+      const maxWidth = window.innerWidth
+      this.$log.debug(isMobile, this.$q.platform, this.$q.screen)
+      this.$log.debug(this.$q.screen.availWidth, window.innerWidth)
+      return isMobile ? maxWidth * mobile : maxWidth * desktop
     },
     additionDs(origin, count = false) {
       let res = origin
