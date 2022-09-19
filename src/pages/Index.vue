@@ -137,6 +137,10 @@ export default {
     saveToCache(v) {
       this.$q.localStorage.set(this.cacheKey, v)
     },
+    cleanMemCache() {
+      this.$log.debug('clean cache')
+      this.cacheUrls = {}
+    },
     // fetchVnStatUrls() {
     //   return Promise.all(this.vnStatUrls.map(url => this.fetchVnStat(url)))
     // },
@@ -153,6 +157,8 @@ export default {
     },
   },
   mounted() {
+    window.addEventListener('beforeunload', this.cleanMemCache)
+
     const v = this.$q.localStorage.getItem(this.cacheKey)
     this.$log.debug('afterMount', v)
     if (v) {
@@ -164,6 +170,10 @@ export default {
     if (this.input.rawUrls) {
       this.reCalcCacheUrls()
     }
+  },
+  destroyed() {
+    this.cleanMemCache()
+    window.removeEventListener('beforeunload', this.cleanMemCache)
   },
 }
 </script>
