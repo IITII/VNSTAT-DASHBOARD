@@ -45,19 +45,19 @@ export default {
   },
   computed: {
     latest24h() {
-      let arr = this.interfaceData?.traffic.hour.slice(-24) || []
+      let arr = this.interfaceData.traffic.hour.slice(-24) || []
       let res = this.getData(arr, 'DD-HH')
       res = this.additionDs(res, true)
       return res
     },
     latest30d() {
-      let arr = this.interfaceData?.traffic.day.slice(-30) || []
+      let arr = this.interfaceData.traffic.day.slice(-30) || []
       let res = this.getData(arr, 'MM/DD')
       res = this.additionDs(res, false)
       return res
     },
     top10d() {
-      let arr = this.interfaceData?.traffic.top.slice(-10) || []
+      let arr = this.interfaceData.traffic.top.slice(-10) || []
       let res = this.getData(arr, 'MM/DD')
       res.labels = res.labels.reverse()
       for (let i = 0; i < res.datasets.length; i++) {
@@ -68,13 +68,13 @@ export default {
       return res
     },
     latestMonth() {
-      let arr = this.interfaceData?.traffic.month || []
+      let arr = this.interfaceData.traffic.month || []
       let res = this.getData(arr, 'YYYY/MM')
       res = this.additionDs(res, false)
       return res
     },
     latestYear() {
-      let arr = this.interfaceData?.traffic.year || []
+      let arr = this.interfaceData.traffic.year || []
       let res = this.getData(arr, 'YYYY')
       res = this.additionDs(res, false)
       return res
@@ -168,7 +168,7 @@ export default {
           borderSkipped: false,
         })
         res.datasets.push({
-          type: 'line', label: '下载总流量', data: tx,
+          type: 'line', label: '下载总流量', data: rx,
           borderColor: rxColor,
           cubicInterpolationMode: 'monotone',
           tension: 0.4,

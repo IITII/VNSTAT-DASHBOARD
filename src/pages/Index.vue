@@ -51,7 +51,7 @@ export default {
       // })
     },
     interfaceOpts() {
-      const json = this.cacheUrls[this.selectUrl]?.data
+      const json = (this.cacheUrls[this.selectUrl] || {}).data
       if (!json) return []
       const version = json['jsonversion']
       if (!(version && parseInt(version) > 1)) {
