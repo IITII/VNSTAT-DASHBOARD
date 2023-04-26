@@ -22,9 +22,13 @@ jobs:
     steps:
       - name: Checkout 🛎️
         # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
-        uses: actions/checkout@v2.3.1
+        uses: actions/checkout@v3
         with:
           persist-credentials: false
+      - name: Setup Node.js & Cache Dependencies ⚡️
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
 
       #See:// https://github.com/actions/virtual-environments/blob/ubuntu18/20201004.1/images/linux/Ubuntu1804-README.md
       #      - name: Install build dependencies
