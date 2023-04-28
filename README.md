@@ -8,7 +8,7 @@
 * You can do like this if you want to build a traffic monitor site for you server
 
 ```bash
-sudo apt insall nginx vnstat -y
+sudo apt install nginx vnstat -y
 git clone https://github.com/IITII/VNSTAT-DASHBOARD /var/www/vnstat
 cd /var/www/vnstat && git checkout main
 #sed -i "s/root \S\+/root \/var\/www\/vnstat;/g" /etc/nginx/sites-available/default \
