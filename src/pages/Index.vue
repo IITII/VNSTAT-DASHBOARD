@@ -5,12 +5,17 @@
                autogrow autofocus outlined
                placeholder="VnStat Json 文件链接，以换行分隔" />
       <q-btn class="col" dense color="primary" @click="reCalcCacheUrls">提交</q-btn>
-      <q-select class="col-6" label="VnStat Json 文件链接"
-                :disable="urlOpts.length === 0"
-                v-model="selectUrl" :options="urlOpts" />
-      <q-select class="col-6" label="网络接口"
-                :disable="interfaceOpts.length === 0"
-                v-model="selectInf" :options="interfaceOpts" />
+      <div class="row justify-between">
+        <q-select class="col-2" label="数据来源"
+                  :disable="sourceOpts.length === 0"
+                  v-model="sourceOpt" :options="sourceOpts" />
+        <q-select class="col-9" label="VnStat Json 文件链接"
+                  :disable="urlOpts.length === 0"
+                  v-model="selectUrl" :options="urlOpts" />
+        <q-select class="col-12" label="网络接口"
+                  :disable="interfaceOpts.length === 0"
+                  v-model="selectInf" :options="interfaceOpts" />
+      </div>
     </div>
     <div class="column eighty-width">
       <vn-dashboard v-if="interfaceData"
@@ -33,6 +38,7 @@ export default {
         rawUrls: '',
       },
       // select
+      sourceOpt: {},
       selectUrl: '',
       selectInf: '',
       cacheUrls: {},
@@ -40,18 +46,26 @@ export default {
     }
   },
   computed: {
+    sourceOpts() {
+      return [{
+        value: 'url',
+        label: '外部链接',
+      }, {
+        value: 'local',
+        label: '复制粘贴',
+      }]
+    },
     urlOpts() {
       if (!this.cacheUrls) return []
       return [...Object.keys(this.cacheUrls)]
-      // return [...Object.keys(this.cacheUrls)].map(_ => {
-      //   return {
-      //     value: _,
-      //     label: _,
-      //   }
-      // })
     },
     interfaceOpts() {
-      const json = (this.cacheUrls[this.selectUrl] || {}).data
+      let json = {}
+      if (this.sourceOpt.value === 'local') {
+        json = JSON.parse(this.input.rawUrls)
+      } else {
+        json = (this.cacheUrls[this.selectUrl] || {}).data
+      }
       if (!json) return []
       const version = json['jsonversion']
       if (!(version && parseInt(version) > 1)) {
@@ -81,6 +95,9 @@ export default {
   },
   methods: {
     reCalcCacheUrls() {
+      if (this.sourceOpt.value !== 'url') {
+        return
+      }
       const reUrls = this.input.rawUrls
         ? this.input.rawUrls.split('\n').filter(_ => _.startsWith('http'))
         : []
@@ -109,6 +126,9 @@ export default {
       }
     },
     fetchUrl(url) {
+      if (this.sourceOpt.value !== 'url') {
+        return
+      }
       this.$log.debug(typeof url, url)
       const c = this.cacheUrls[url] || {}
       if (c.loaded) {
@@ -135,6 +155,9 @@ export default {
       })
     },
     saveToCache(v) {
+      if (this.sourceOpt.value !== 'url') {
+        return
+      }
       this.$q.localStorage.set(this.cacheKey, v)
     },
     cleanMemCache() {
@@ -148,17 +171,24 @@ export default {
   watch: {
     async selectUrl(v) {
       this.$log.debug(typeof v, v)
+      if (this.sourceOpt.value !== 'url') {
+        return
+      }
       await this.fetchUrl(this.selectUrl)
       this.selectInf = this.interfaceOpts[0] || ''
     },
     async selectInf(v) {
       this.$log.debug(typeof v, v)
+      if (this.sourceOpt.value !== 'url') {
+        return
+      }
       this.saveToCache(this.input.rawUrls)
     },
   },
   mounted() {
     window.addEventListener('beforeunload', this.cleanMemCache)
 
+    this.sourceOpt = this.sourceOpts[0]
     const v = this.$q.localStorage.getItem(this.cacheKey)
     this.$log.debug('afterMount', v)
     if (v) {
